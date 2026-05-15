@@ -1,10 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { Item, CityStats } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY || "" });
 
 export async function lookupItemOnWiki(itemName: string): Promise<Partial<Item>[] | null> {
-  if (!process.env.GEMINI_API_KEY) return null;
+  if (!process.env.VITE_GEMINI_API_KEY) return null;
 
   const prompt = `
     Sei un assistente esperto di Pathfinder Prima Edizione (PF1e). 
@@ -45,7 +45,7 @@ export async function lookupItemOnWiki(itemName: string): Promise<Partial<Item>[
 }
 
 export async function lookupCityStats(cityName: string): Promise<Partial<CityStats> | null> {
-  if (!process.env.GEMINI_API_KEY) return null;
+  if (!process.env.VITE_GEMINI_API_KEY) return null;
 
   const prompt = `
     Sei un assistente esperto di Pathfinder Prima Edizione.
@@ -84,7 +84,7 @@ export async function lookupCityStats(cityName: string): Promise<Partial<CitySta
 }
 
 export async function generateCityMagicInventory(cityName: string, stats: CityStats, counts: { minor: number, medium: number, major: number }): Promise<Partial<Item>[] | null> {
-  if (!process.env.GEMINI_API_KEY) return null;
+  if (!process.env.VITE_GEMINI_API_KEY) return null;
 
   const total = counts.minor + counts.medium + counts.major;
   if (total === 0) return [];
