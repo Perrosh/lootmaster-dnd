@@ -1,0 +1,6 @@
+{
+  "name": "LootMaster D&D",
+  "description": "App per la gestione dell'inventario, compravendita di oggetti e tracciamento dell'oro per campagne D&D.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

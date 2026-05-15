@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    match /parties/{partyId} {
+      allow read, write: if isSignedIn();
+      
+      match /inventory/{itemId} {
+        allow read, write: if isSignedIn();
+      }
+      
+      match /transactions/{txId} {
+        allow read, write: if isSignedIn();
+      }
+    }
+  }
+}

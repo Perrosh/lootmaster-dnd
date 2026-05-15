@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-medieval: "MedievalSharp", cursive;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-gold: #d4af37;
+  --color-arcane: #00f2ff;
+  --color-sin-wrath: #ff4d4d;
+  --color-sin-greed: #ffd700;
+  --color-sin-pride: #cc33ff;
+  --color-dark-bg: #08090a;
+  --color-surface: #121418;
+  --color-surface-dim: #0a0c0e;
+  --color-border: #1f242d;
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-stone-300 antialiased selection:bg-arcane/30;
+    background-image: 
+      radial-gradient(circle at 50% -20%, rgba(204, 51, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 0% 0%, rgba(0, 242, 255, 0.02) 0%, transparent 30%);
+  }
+}
+
+.gold-shadow {
+  box-shadow: 0 4px 20px rgba(0, 242, 255, 0.05);
+}
+
+.medieval-button {
+  @apply px-4 py-2 bg-stone-800 hover:bg-arcane hover:text-black text-arcane font-bold rounded transition-all active:scale-95 border border-arcane/30 shadow-lg shadow-arcane/5 uppercase tracking-widest text-[10px];
+}
+
+.card-elegant {
+  @apply bg-surface border border-border rounded-lg p-4 transition-all hover:border-arcane/40 shadow-xl shadow-black/40;
+}
+
+.label-micro {
+  @apply text-[10px] text-gray-500 uppercase tracking-widest font-semibold;
+}
+
+.sihedron-border {
+  position: relative;
+  border: 1px solid var(--color-border);
+}
+
+.sihedron-border::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: -1px; right: -1px; bottom: -1px;
+  background: linear-gradient(45deg, transparent 40%, var(--color-sin-pride) 50%, transparent 60%);
+  background-size: 200% 200%;
+  animation: runic-glow 6s linear infinite;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+@keyframes runic-glow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}

@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "Party": {
+      "title": "Party",
+      "description": "D&D Party loot and gold data",
+      "type": "object",
+      "properties": {
+        "gold": { "type": "number", "description": "Current party gold pieces" },
+        "name": { "type": "string", "description": "Name of the party" },
+        "lastUpdate": { "type": "number", "description": "Last update timestamp" }
+      },
+      "required": ["gold", "name"]
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "An item in the party inventory",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "quantity": { "type": "number" },
+        "weight": { "type": "string" },
+        "category": { "type": "string" },
+        "addedAt": { "type": "number" }
+      },
+      "required": ["name", "price", "quantity"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Log of buy/sell actions",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["buy", "sell"] },
+        "itemId": { "type": "string" },
+        "itemName": { "type": "string" },
+        "price": { "type": "number" },
+        "quantity": { "type": "number" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["type", "itemName", "price", "quantity", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/parties/{partyId}": {
+      "schema": "Party",
+      "description": "Party master record"
+    },
+    "/parties/{partyId}/inventory/{itemId}": {
+      "schema": "InventoryItem",
+      "description": "Individual items in party inventory"
+    },
+    "/parties/{partyId}/transactions/{txId}": {
+      "schema": "Transaction",
+      "description": "Transaction logs for the party"
+    }
+  }
+}
