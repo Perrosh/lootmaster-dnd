@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY || ""
+  apiKey: process.env.VITE_GEMINI_API_KEY || ""
 });
 
 function extractJsonText(response) {
@@ -155,9 +155,9 @@ export default async function handler(req, res) {
     });
   }
 
-  if (!process.env.GEMINI_API_KEY) {
+  if (!process.env.VITE_GEMINI_API_KEY) {
     return res.status(500).json({
-      error: "GEMINI_API_KEY non configurata su Vercel."
+      error: "VITE_GEMINI_API_KEY non configurata su Vercel."
     });
   }
 
