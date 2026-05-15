@@ -3,15 +3,18 @@ import { Item, CityStats } from "../types";
 
 const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
-const ai = new GoogleGenAI({
-  apiKey: geminiApiKey || "",
-});
+console.log("Variabili Vite disponibili:", import.meta.env);
+console.log("Gemini key presente?", Boolean(import.meta.env.VITE_GEMINI_API_KEY));
 
 export async function lookupItemOnWiki(itemName: string): Promise<Partial<Item>[] | null> {
   if (!geminiApiKey) {
     console.error("VITE_GEMINI_API_KEY non trovata");
     return null;
   }
+
+  const ai = new GoogleGenAI({
+    apiKey: geminiApiKey,
+  });
 
   const prompt = `
     Sei un assistente esperto di Pathfinder Prima Edizione (PF1e). 
