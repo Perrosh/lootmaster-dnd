@@ -1329,9 +1329,11 @@ export default function App() {
                     <label className="label-micro uppercase">Prezzo (MO)</label>
                     <input 
                       type="number"
+                      min="0"
                       className="w-full bg-dark-bg border border-border rounded-lg p-3 text-stone-100 focus:border-gold outline-none"
-                      value={manualItem.price}
-                      onChange={(e) => setManualItem({ ...manualItem, price: parseFloat(e.target.value) || 0 })}
+                      value={manualItem.price === 0 ? "" : manualItem.price}
+                      onChange={(e) => setManualItem({ ...manualItem, price: e.target.value === "" ? 0 : Math.max(0, parseFloat(e.target.value) || 0) })}
+                      placeholder="0"
                     />
                   </div>
                   <div className="space-y-1">
@@ -1340,8 +1342,9 @@ export default function App() {
                       type="number"
                       min="1"
                       className="w-full bg-dark-bg border border-border rounded-lg p-3 text-stone-100 focus:border-gold outline-none"
-                      value={manualItem.quantity}
-                      onChange={(e) => setManualItem({ ...manualItem, quantity: parseInt(e.target.value) || 1 })}
+                      value={manualItem.quantity === 0 ? "" : manualItem.quantity}
+                      onChange={(e) => setManualItem({ ...manualItem, quantity: e.target.value === "" ? 0 : Math.max(1, parseInt(e.target.value) || 1) })}
+                      placeholder="1"
                     />
                   </div>
                 </div>
@@ -1349,20 +1352,24 @@ export default function App() {
                   <label className="label-micro uppercase">Vendi al (%)</label>
                   <input 
                     type="number"
-                    min="0"
+                    min="1"
                     max="100"
                     className="w-full bg-dark-bg border border-border rounded-lg p-3 text-stone-100 focus:border-gold outline-none font-mono"
-                    value={manualItem.salePercentage}
-                    onChange={(e) => setManualItem({ ...manualItem, salePercentage: parseInt(e.target.value) || 0 })}
+                    value={manualItem.salePercentage === 0 ? "" : manualItem.salePercentage}
+                    onChange={(e) => setManualItem({ ...manualItem, salePercentage: e.target.value === "" ? 0 : Math.max(1, Math.min(100, parseInt(e.target.value) || 50)) })}
+                    placeholder="50"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="label-micro uppercase">Peso (kg)</label>
                   <input 
-                    placeholder="es. 2 kg"
+                    type="number"
+                    min="0"
+                    step="0.1"
+                    placeholder="es. 2.0"
                     className="w-full bg-dark-bg border border-border rounded-lg p-3 text-stone-100 focus:border-gold outline-none"
-                    value={manualItem.weight}
-                    onChange={(e) => setManualItem({ ...manualItem, weight: e.target.value })}
+                    value={manualItem.weight === "" ? "" : manualItem.weight}
+                    onChange={(e) => setManualItem({ ...manualItem, weight: e.target.value === "" ? "" : Math.max(0, parseFloat(e.target.value) || 0).toString() })}
                   />
                 </div>
                 <div className="space-y-1">
